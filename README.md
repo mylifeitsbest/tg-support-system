@@ -178,14 +178,5 @@ tg-support-system/
 │   └── index.html            # Telegram WebApp SDK
 ├── .env.example
 ├── docker-compose.yml
-├── Makefile
-└── CONTRIBUTING.md
+└── Makefile
 ```
-
-## Агентский воркфлоу
-
-```
-/pplan N → /work N → /verify N → /ship N
-```
-
-Подробнее: [`CONTRIBUTING.md`](CONTRIBUTING.md)
