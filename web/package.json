@@ -1,13 +1,14 @@
 {
   "name": "tg-support-web",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.4.0"
+    "vue": "^3.4.0",
+    "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.0",
