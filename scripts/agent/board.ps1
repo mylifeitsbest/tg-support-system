@@ -14,17 +14,17 @@ if ($Issue -notmatch '^\d+$') {
 }
 
 # --- CHANGE_ME ---
-$Owner = "CHANGE_ME"
-$ProjectNumber = 1
-$ProjectId = "CHANGE_ME"
-$StatusFieldId = "CHANGE_ME"
-$Repo = "CHANGE_ME/CHANGE_ME"
+$Owner = "mylifeitsbest"
+$ProjectNumber = 2
+$ProjectId = "PVT_kwHOC3yBd84BgJQP"
+$StatusFieldId = "PVTSSF_lAHOC3yBd84BgJQPzhaXDTM"
+$Repo = "mylifeitsbest/tg-support-system"
 $StatusOptions = @{
-  backlog      = "CHANGE_ME_BACKLOG"
-  ready        = "CHANGE_ME_READY"
-  "in-progress"= "CHANGE_ME_IN_PROGRESS"
-  "in-review"  = "CHANGE_ME_IN_REVIEW"   # often same as in-progress
-  done         = "CHANGE_ME_DONE"
+  backlog      = "f75ad846"
+  ready        = "47fc9ee4"
+  "in-progress"= "98236657"
+  "in-review"  = "165ec71f"
+  done         = "73d5b50b"
   # important  = "CHANGE_ME_IMPORTANT"   # uncomment if you have this column
 }
 

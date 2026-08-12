@@ -44,8 +44,8 @@ Full policy: `.cursor/rules/model-policy.mdc`.
 - **Parallel agents**: one ticket per agent; prefer separate worktrees.
   Never mix another ticket's files into your commits.
 - Conventional Commits (`feat`/`fix`/`test`/`chore`/`refactor`/`docs`/`perf`).
-  Subject ≤50 chars. Scopes: `CHANGE_ME` (e.g. `api`, `bot`, `web`).
-- Tickets live as **GitHub Issues** on this repository (`CHANGE_ME/CHANGE_ME`).
+  Subject ≤50 chars. Scopes: `api`, `bot`, `web`, `scripts`.
+- Tickets live as **GitHub Issues** on this repository (`mylifeitsbest/tg-support-system`).
   Issue text in **Russian**. Titles: `[ N ] Краткий заголовок` right after
   create. Every commit references `#N` (`Closes #N` / `Refs #N`).
 - **Issues are flat** — no sub-issues by default. Plan = checklist in the
@@ -69,9 +69,9 @@ Fill this table (also mirror in **project-atlas**):
 
 | Service | Runtime | Port | Notes |
 | --- | --- | --- | --- |
-| `CHANGE_ME` (e.g. `api/`) | CHANGE_ME | CHANGE_ME | CHANGE_ME |
-| `CHANGE_ME` (e.g. `bot/`) | CHANGE_ME | CHANGE_ME | CHANGE_ME |
-| `CHANGE_ME` (e.g. `web/`) | CHANGE_ME | CHANGE_ME | CHANGE_ME |
+| `api/` | FastAPI REST + SQLite | `make api` | 8000 | stdout |
+| `bot/` | aiogram 3 Telegram bot | `make bot` | — | stdout |
+| `web/` | Vue 3 Mini App (operator UI) | `make web` | 5173 | stdout |
 
 ## Agentic Workflow Commands
 

@@ -1,0 +1,11 @@
+.env
+*.db
+*.log
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+node_modules/
+dist/
+.agent/verify-status-*.json
+.agent/agent-config.json
