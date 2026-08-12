@@ -112,4 +112,21 @@ async def send_message(
     db.add(msg)
     await db.commit()
     await db.refresh(msg)
+
+    # If the operator sends a message, forward it to the bot via callback
+    if body.sender == "operator":
+        import httpx
+        from app.config import settings
+        import logging
+        
+        try:
+            async with httpx.AsyncClient() as client:
+                await client.post(
+                    settings.BOT_CALLBACK_URL,
+                    json={"chat_id": chat.user_id, "text": body.text},
+                    timeout=5.0
+                )
+        except Exception as e:
+            logging.error(f"Failed to notify bot for message {msg.id}: {e}")
+
     return msg

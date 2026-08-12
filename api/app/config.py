@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     DATABASE_URL: str = "sqlite+aiosqlite:///./support.db"
     BOT_TOKEN: str
     OPERATOR_ALLOWLIST: str = ""  # comma-separated Telegram user IDs
+    BOT_CALLBACK_URL: str = "http://localhost:8001/send"
 
     @property
     def operator_ids(self) -> list[int]:
