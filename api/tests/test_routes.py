@@ -8,7 +8,7 @@ import hmac
 def get_test_init_data(operator_id: int) -> str:
     user = json.dumps({"id": operator_id}, separators=(",", ":"))
     data = f"auth_date=123456\nuser={user}"
-    secret = hmac.new(b"WebAppData", b"1234567890:AAtest_token_for_tests_only_not_real", hashlib.sha256).digest()
+    secret = hmac.new(b"WebAppData", b"1234567890:test_token_for_tests_only_not_real", hashlib.sha256).digest()
     hash_val = hmac.new(secret, data.encode(), hashlib.sha256).hexdigest()
     params = {"auth_date": "123456", "user": user, "hash": hash_val}
     return urllib.parse.urlencode(params)
