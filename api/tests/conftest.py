@@ -4,7 +4,7 @@ import os
 import pytest
 
 # Set env before any app import so Settings picks them up
-os.environ["BOT_TOKEN"] = "1234567890:AAtest_token_for_tests_only_not_real"
+os.environ["BOT_TOKEN"] = "1234567890:test_token_for_tests_only_not_real"
 os.environ["DATABASE_URL"] = "sqlite+aiosqlite:///:memory:"
 os.environ["OPERATOR_ALLOWLIST"] = "999"
 
