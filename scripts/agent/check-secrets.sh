@@ -20,6 +20,7 @@ else
 fi
 
 EXCLUDES=(
+  ":(exclude).env.example"
   ":(exclude)**/.env.example"
   ":(exclude)scripts/agent/check-secrets.sh"
   ":(exclude)docs/**"

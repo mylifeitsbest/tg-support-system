@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Mechanical part of /ship: verify-gated ticket branch -> dev.
+# Mechanical part of /ship: verify-gated ticket branch -> main.
 # One command from message to push, so a model run cannot stop halfway.
 #
 # Usage: scripts/agent/ship.sh <ticket> <message-file> [file...]
@@ -9,7 +9,7 @@
 #                   committed (cadence commits) — then the script just
 #                   gates and pushes.
 #
-# Ships ticket branch into integration (dev). Does not touch main.
+# Ships ticket branch into integration (main). Does not touch main.
 set -euo pipefail
 
 usage() {
@@ -35,7 +35,7 @@ cd "$(git rev-parse --show-toplevel)"
 
 branch=$(git rev-parse --abbrev-ref HEAD)
 case "$branch" in
-  main|dev)
+  main|main)
     echo "error: on '$branch' — ship works from a ticket branch (feature/$ticket-...)" >&2
     exit 1
     ;;
@@ -70,10 +70,10 @@ grep -q "\"sha\": \"$head_sha\"" "$status_file" || {
   exit 1
 }
 
-git pull --rebase --autostash origin dev
+git pull --rebase --autostash origin main
 new_head=$(git rev-parse HEAD)
 [ "$new_head" = "$head_sha" ] || {
-  echo "error: dev moved ($head_sha -> $new_head) — verify record is stale." >&2
+  echo "error: main moved ($head_sha -> $new_head) — verify record is stale." >&2
   echo "Re-run /verify $ticket, then run this script again." >&2
   exit 1
 }
@@ -90,31 +90,31 @@ elif [ $# -ge 1 ]; then
   exit 1
 fi
 
-if [ "$(git rev-list origin/dev..HEAD --count)" -eq 0 ]; then
-  echo "error: nothing to ship — no commits ahead of origin/dev" >&2
+if [ "$(git rev-list origin/main..HEAD --count)" -eq 0 ]; then
+  echo "error: nothing to ship — no commits ahead of origin/main" >&2
   exit 1
 fi
 
 # Foreign-commit guard: every commit being shipped must name this ticket, so a
 # parallel agent's work can never ride along in the same push.
 foreign=""
-for sha in $(git rev-list origin/dev..HEAD); do
+for sha in $(git rev-list origin/main..HEAD); do
   if ! git log -1 --format='%B' "$sha" | grep -q "#$ticket\b"; then
     foreign="$foreign
   $(git log -1 --format='%h %s' "$sha")"
   fi
 done
 if [ -n "$foreign" ]; then
-  echo "error: commits ahead of dev do not reference #$ticket:$foreign" >&2
+  echo "error: commits ahead of main do not reference #$ticket:$foreign" >&2
   echo "  every ticket commit body needs 'Refs #$ticket' or 'Closes #$ticket'." >&2
   exit 1
 fi
 
-# Secrets guard over everything not yet on dev.
-scripts/agent/check-secrets.sh origin/dev..HEAD
+# Secrets guard over everything not yet on main.
+scripts/agent/check-secrets.sh origin/main..HEAD
 
 git push origin "HEAD:refs/heads/$branch"
-# Fast-forward only: a rejection here means dev moved and the ticket needs a
+# Fast-forward only: a rejection here means main moved and the ticket needs a
 # fresh /verify before it can ship.
-git push origin "HEAD:refs/heads/dev"
-echo "shipped: $(git rev-parse --short HEAD) ($branch) -> dev"
+git push origin "HEAD:refs/heads/main"
+echo "shipped: $(git rev-parse --short HEAD) ($branch) -> main"
