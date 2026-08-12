@@ -7,5 +7,5 @@ __pycache__/
 venv/
 node_modules/
 dist/
-.agent/verify-status-*.json
-.agent/agent-config.json
+.agent/
+.pytest_cache/

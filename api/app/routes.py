@@ -1,11 +1,14 @@
 """API routers — chats and messages."""
+import logging
 from datetime import datetime, timezone
 
+import httpx
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.auth import OperatorDep
+from app.config import settings
 from app.database import get_db
 from app.models import Chat, ChatStatus, Message, TgUser
 from app.schemas import ChatOut, ChatStatusUpdate, MessageCreate, MessageOut, UserCreate, UserOut
@@ -115,13 +118,9 @@ async def send_message(
 
     # If the operator sends a message, forward it to the bot via callback
     if body.sender == "operator":
-        import httpx
-        from app.config import settings
-        import logging
-        
         try:
-            async with httpx.AsyncClient() as client:
-                await client.post(
+            async with httpx.AsyncClient() as http:
+                await http.post(
                     settings.BOT_CALLBACK_URL,
                     json={"chat_id": chat.user_id, "text": body.text},
                     timeout=5.0

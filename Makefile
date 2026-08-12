@@ -19,6 +19,7 @@ dev:
 
 test:
 	cd api && pytest
+	cd bot && pytest
 
 docker-up:
 	docker compose up --build
