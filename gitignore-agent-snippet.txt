@@ -1,4 +1,0 @@
-﻿# Agent workflow runtime (do not commit)
-.agent/*
-!.agent/verify-status.example.json
-.agent/agent-config.json

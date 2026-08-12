@@ -1,5 +1,0 @@
-{
-  "_comment": "Copy to agent-config.json (or keep as agent-config.json in repo root). Owner-maintained.",
-  "integration_branch": "dev",
-  "production_branch": "main"
-}
